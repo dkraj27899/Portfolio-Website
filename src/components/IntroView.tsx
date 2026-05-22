@@ -18,60 +18,64 @@ const STATS = [
   { value: "2,000+", label: "Schemes", sub: "Tracked"   },
 ];
 
-const JOURNEY = [
+const CAREER = [
   {
-    id: "ch01", chapter: "01", type: "education",
-    label: "ORIGIN STORY",
-    title: "B.Tech · Computer Science",
-    org: "IIT Kanpur",
+    id: "iitk",
+    logo: { text: "IIT", sub: "K", bg: "linear-gradient(145deg, #1e3a8a 0%, #2563eb 100%)", glow: "rgba(37,99,235,0.3)" },
+    company: "IIT Kanpur",
+    role: "B.Tech · Computer Science",
     period: "2018 – 2023",
-    color: "#3b82f6",
-    stats: [{ label: "AIR", value: "32" }, { label: "Batch", value: "'23" }],
-    tags: ["C++", "Algorithms", "Data Structures"],
-    xp: 1200,
-    active: false,
+    accent: "#3b82f6",
+    points: [
+      "AIR 32 in JEE Advanced (ST Category)",
+      "B.Tech in Computer Science & Engineering, Class of 2023",
+    ],
+    tags: ["C++", "Algorithms", "Data Structures", "ML"],
+    current: false,
   },
   {
-    id: "ch02", chapter: "02", type: "work",
-    label: "FIRST DEPLOY",
-    title: "Web Developer",
-    org: "The Smart Traveller",
+    id: "tst",
+    logo: { text: "TST", sub: "", bg: "linear-gradient(145deg, #78350f 0%, #d97706 100%)", glow: "rgba(217,119,6,0.28)" },
+    company: "The Smart Traveller",
+    role: "Web Developer",
     period: "Jun 2022",
-    color: "#f59e0b",
-    stats: [{ label: "Stack", value: "React" }],
+    accent: "#f59e0b",
+    points: [
+      "Built React/Redux interfaces with Google Maps integration",
+      "Implemented Firebase Cloud Messaging for push notifications",
+    ],
     tags: ["React", "Redux", "Firebase", "G-Maps"],
-    xp: 600,
-    active: false,
+    current: false,
   },
   {
-    id: "ch03", chapter: "03", type: "work",
-    label: "PRODUCTION LAUNCH",
-    title: "Software Developer",
-    org: "Goalzen Capital Services",
+    id: "gz1",
+    logo: { text: "GZ", sub: "", bg: "linear-gradient(145deg, #134e4a 0%, #0d9488 100%)", glow: "rgba(13,148,136,0.28)" },
+    company: "Goalzen Capital Services",
+    role: "Software Developer",
     period: "Sep 2024",
-    color: "#14b8a6",
-    stats: [{ label: "Product", value: "Smallcase" }],
-    tags: ["Node.js", "React", "Analytics", "Quant"],
-    xp: 1400,
-    active: false,
+    accent: "#14b8a6",
+    points: [
+      "Built Smallcase Tracking & Analytics with Node.js & React",
+      "Designed quantitative optimization pipelines in Python",
+    ],
+    tags: ["Node.js", "React", "Analytics", "Python"],
+    current: false,
   },
   {
-    id: "ch04", chapter: "04", type: "current",
-    label: "SENIOR MODE",
-    title: "Senior Software Developer",
-    org: "Goalzen Capital Services",
-    period: "Jul 2025 → NOW",
-    color: "#2dd4bf",
-    stats: [{ label: "AMCs", value: "47+" }, { label: "Schemes", value: "2K+" }],
+    id: "gz2",
+    logo: { text: "GZ", sub: "↑", bg: "linear-gradient(145deg, #0d9488 0%, #2dd4bf 100%)", glow: "rgba(45,212,191,0.32)" },
+    company: "Goalzen Capital Services",
+    role: "Senior Software Developer",
+    period: "Jul 2025 – Present",
+    accent: "#2dd4bf",
+    points: [
+      "ETL pipelines for 47+ AMCs, tracking 2,000+ mutual fund schemes",
+      "Node.js/Express backend powering real-time MF analytics",
+    ],
     tags: ["Pandas", "ETL", "Express", "MF Analytics"],
-    xp: 2200,
-    active: true,
+    current: true,
   },
 ];
-
-const TOTAL_XP  = JOURNEY.reduce((s, j) => s + j.xp, 0);
-const MAX_XP    = 6000;
-const LEVEL     = Math.floor(TOTAL_XP / 1200) + 1;
 
 export default function IntroView({ setTab }: { setTab: (tab: string) => void }) {
   const [cursorOn,     setCursorOn]     = useState(true);
@@ -84,7 +88,7 @@ export default function IntroView({ setTab }: { setTab: (tab: string) => void })
     const iv = setInterval(() => {
       count++;
       setVisibleCount(count);
-      if (count >= JOURNEY.length) clearInterval(iv);
+      if (count >= CAREER.length) clearInterval(iv);
     }, 750);
     return () => clearInterval(iv);
   }, []);
@@ -251,173 +255,159 @@ export default function IntroView({ setTab }: { setTab: (tab: string) => void })
         </div>
       </div>
 
-      {/* ═══════════════ RIGHT — Career Quest Log ═══════════════ */}
+      {/* ═══════════════ RIGHT — Experience Panel ═══════════════ */}
       <div className="flex-1 w-full max-w-xl">
         <div
           className="rounded-2xl overflow-hidden flex flex-col"
           style={{
-            background: "linear-gradient(145deg, rgba(11,17,32,0.96), rgba(5,7,15,0.98))",
-            border: "1px solid rgba(255,255,255,0.07)",
-            boxShadow: "0 0 60px rgba(0,0,0,0.7), 0 0 30px rgba(20,184,166,0.06), inset 0 1px 0 rgba(255,255,255,0.06)"
+            background: "linear-gradient(160deg, rgba(13,19,35,0.97) 0%, rgba(5,7,15,0.99) 100%)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            boxShadow: "0 32px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset, 0 1px 0 rgba(255,255,255,0.07) inset"
           }}
         >
-          {/* ── Header bar ── */}
-          <div className="flex justify-between items-center px-5 py-3 border-b border-white/[0.06]">
+          {/* ── Chrome header ── */}
+          <div className="flex justify-between items-center px-5 py-3.5 border-b border-white/[0.06]"
+            style={{ background: "rgba(255,255,255,0.015)" }}>
             <div className="flex items-center gap-3">
               <div className="flex gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" style={{ boxShadow: "0 0 4px rgba(255,95,87,0.5)" }} />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" style={{ boxShadow: "0 0 4px rgba(254,188,46,0.5)" }} />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" style={{ boxShadow: "0 0 4px rgba(40,200,64,0.5)" }} />
               </div>
-              <span className="font-mono text-[9px] text-[#2dd4bf]/60 tracking-widest uppercase ml-1">
-                CAREER.LOG — DIKSHANT.EXE
-              </span>
+              <span className="font-sans font-semibold text-[12px] text-white/50 tracking-tight ml-1">Experience</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-[9px] font-bold text-[#f59e0b]">LVL {LEVEL}</span>
-              <span className="font-mono text-[8px] text-[#64748b]">{TOTAL_XP.toLocaleString()} XP</span>
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" style={{ boxShadow: "0 0 6px rgba(34,197,94,0.6)" }} />
+              <span className="font-mono text-[9px] text-[#64748b] tracking-wider">{CAREER.length} entries</span>
             </div>
           </div>
 
-          {/* ── XP bar ── */}
-          <div className="px-5 pt-3 pb-2.5 border-b border-white/[0.04]">
-            <div className="flex justify-between font-mono text-[8px] text-[#64748b] mb-1.5 tracking-widest uppercase">
-              <span>Total Experience</span>
-              <span>{TOTAL_XP.toLocaleString()} / {MAX_XP.toLocaleString()} XP</span>
-            </div>
-            <div className="h-1.5 rounded-full overflow-hidden border border-white/5" style={{ background: "#05070f" }}>
-              <div
-                className="h-full rounded-full transition-all duration-[2000ms]"
-                style={{
-                  width: `${(TOTAL_XP / MAX_XP) * 100}%`,
-                  background: "linear-gradient(90deg, #3b82f6, #14b8a6, #2dd4bf, #f59e0b)",
-                  boxShadow: "0 0 8px rgba(45,212,191,0.5)"
-                }}
-              />
-            </div>
-          </div>
-
-          {/* ── Chapter cards ── */}
-          <div
-            ref={cardsRef}
-            className="flex-1 overflow-y-auto p-4 space-y-3"
-            style={{ minHeight: "340px" }}
-          >
-            {JOURNEY.slice(0, visibleCount).map((item, idx) => (
+          {/* ── Timeline entries ── */}
+          <div ref={cardsRef} className="flex-1 overflow-y-auto" style={{ maxHeight: "460px" }}>
+            {CAREER.slice(0, visibleCount).map((item, idx) => (
               <div
                 key={item.id}
-                className="relative flex gap-3 p-3.5 rounded-xl"
-                style={{
-                  background: item.active
-                    ? `linear-gradient(135deg, ${item.color}12, ${item.color}05)`
-                    : `${item.color}07`,
-                  border: `1px solid ${item.color}${item.active ? "40" : "22"}`,
-                  boxShadow: item.active ? `0 0 24px ${item.color}14` : "none",
-                  animation: "fadeSlideIn 0.4s ease forwards",
-                }}
+                className="relative"
+                style={{ animation: "fadeSlideIn 0.4s ease forwards" }}
               >
-                {/* Vertical connector to next card */}
-                {idx < JOURNEY.length - 1 && (
-                  <div
-                    className="absolute left-[27px] rounded-full"
-                    style={{
-                      top: "52px", width: "1px",
-                      height: "calc(100% + 10px)",
-                      background: `linear-gradient(to bottom, ${item.color}40, transparent)`,
-                      zIndex: 0,
-                    }}
-                  />
-                )}
-
-                {/* Chapter badge */}
+                {/* Entry row */}
                 <div
-                  className="relative z-10 flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-mono font-black text-[11px]"
+                  className="flex gap-4 px-5 py-4"
                   style={{
-                    background: `${item.color}22`,
-                    border: `1px solid ${item.color}45`,
-                    color: item.color,
-                    boxShadow: `0 0 12px ${item.color}25`,
+                    background: item.current
+                      ? "linear-gradient(90deg, rgba(45,212,191,0.04) 0%, transparent 100%)"
+                      : "transparent",
+                    borderLeft: item.current ? "2px solid rgba(45,212,191,0.35)" : "2px solid transparent",
                   }}
                 >
-                  {item.chapter}
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0 relative z-10">
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <div>
-                      <p className="font-mono text-[8px] uppercase tracking-[0.18em] font-semibold" style={{ color: item.color }}>
-                        {item.label}
-                      </p>
-                      <h4 className="font-sans font-bold text-[13px] text-white leading-tight mt-0.5">{item.title}</h4>
-                      <p className="font-mono text-[10px] text-[#94a3b8] mt-0.5">{item.org} · {item.period}</p>
+                  {/* Company logo mark */}
+                  <div className="flex-shrink-0 flex flex-col items-center gap-1.5">
+                    <div
+                      className="w-11 h-11 rounded-xl flex flex-col items-center justify-center select-none"
+                      style={{
+                        background: item.logo.bg,
+                        boxShadow: `0 6px 20px ${item.logo.glow}, 0 0 0 1px rgba(255,255,255,0.12) inset`,
+                      }}
+                    >
+                      <span className="text-white font-black text-[11px] leading-none tracking-tight">{item.logo.text}</span>
+                      {item.logo.sub && (
+                        <span className="text-white/80 font-bold text-[9px] leading-none mt-0.5">{item.logo.sub}</span>
+                      )}
                     </div>
-                    {item.active && (
-                      <span
-                        className="flex-shrink-0 flex items-center gap-1.5 text-[8px] font-mono font-bold px-2 py-1 rounded-md"
-                        style={{ background: "rgba(45,212,191,0.12)", color: "#2dd4bf", border: "1px solid rgba(45,212,191,0.28)" }}
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#2dd4bf] animate-pulse" />
-                        ACTIVE
-                      </span>
+                    {/* Connector line to next entry */}
+                    {idx < CAREER.length - 1 && visibleCount > idx + 1 && (
+                      <div className="w-px flex-1 min-h-[12px]"
+                        style={{ background: "linear-gradient(to bottom, rgba(255,255,255,0.08), transparent)" }} />
                     )}
                   </div>
 
-                  {/* Stat chips + tech tags */}
-                  <div className="flex flex-wrap gap-1.5 mt-2">
-                    {item.stats.map(s => (
-                      <span
-                        key={s.label}
-                        className="font-mono text-[9px] px-2 py-0.5 rounded-md font-semibold"
-                        style={{ background: `${item.color}18`, color: item.color, border: `1px solid ${item.color}28` }}
-                      >
-                        {s.value} {s.label}
+                  {/* Content */}
+                  <div className="flex-1 min-w-0 pb-1">
+                    {/* Header row */}
+                    <div className="flex items-start justify-between gap-3 mb-1.5">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h4 className="font-sans font-bold text-[14px] text-white leading-tight tracking-tight">
+                            {item.company}
+                          </h4>
+                          {item.current && (
+                            <span
+                              className="inline-flex items-center gap-1 text-[8px] font-mono font-bold px-1.5 py-0.5 rounded-md"
+                              style={{ background: "rgba(34,197,94,0.12)", color: "#22c55e", border: "1px solid rgba(34,197,94,0.25)" }}
+                            >
+                              <span className="w-1 h-1 rounded-full bg-[#22c55e] animate-pulse" />
+                              NOW
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[12px] text-[#94a3b8] mt-0.5 font-sans">{item.role}</p>
+                      </div>
+                      <span className="flex-shrink-0 font-mono text-[9px] text-[#475569] mt-0.5 whitespace-nowrap">
+                        {item.period}
                       </span>
-                    ))}
-                    {item.tags.map(t => (
-                      <span
-                        key={t}
-                        className="font-mono text-[9px] px-2 py-0.5 rounded-md text-[#64748b]"
-                        style={{ background: "rgba(255,255,255,0.035)", border: "1px solid rgba(255,255,255,0.07)" }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Per-card XP bar */}
-                  <div className="mt-2.5 flex items-center gap-2">
-                    <div className="flex-1 h-0.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
-                      <div
-                        className="h-full rounded-full"
-                        style={{ width: `${(item.xp / MAX_XP) * 100}%`, background: item.color, boxShadow: `0 0 4px ${item.color}60` }}
-                      />
                     </div>
-                    <span className="font-mono text-[8px] flex-shrink-0 font-semibold" style={{ color: item.color }}>
-                      +{item.xp.toLocaleString()} XP
-                    </span>
+
+                    {/* Achievement bullets */}
+                    <ul className="space-y-1 mb-2.5">
+                      {item.points.map((pt, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span
+                            className="flex-shrink-0 w-[5px] h-[5px] rounded-full mt-[5px]"
+                            style={{ background: item.accent, boxShadow: `0 0 4px ${item.accent}80` }}
+                          />
+                          <span className="text-[11px] text-[#94a3b8] leading-relaxed">{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Tech tags */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {item.tags.map(t => (
+                        <span
+                          key={t}
+                          className="font-mono text-[9px] px-2 py-0.5 rounded-md"
+                          style={{
+                            color: "#64748b",
+                            background: "rgba(255,255,255,0.04)",
+                            border: "1px solid rgba(255,255,255,0.07)"
+                          }}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
+
+                {/* Divider */}
+                {idx < visibleCount - 1 && (
+                  <div className="mx-5 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
+                )}
               </div>
             ))}
 
-            {/* Loading next chapter */}
-            {visibleCount < JOURNEY.length && (
-              <div className="flex items-center gap-2 font-mono text-[10px] text-[#2dd4bf]/40 px-1 py-1">
-                <span className="inline-block w-1.5 h-3 bg-[#2dd4bf]/40 rounded-sm animate-pulse" />
-                <span>Loading chapter {String(visibleCount + 1).padStart(2, "0")}...</span>
+            {/* Skeleton loader for next entry */}
+            {visibleCount < CAREER.length && (
+              <div className="flex gap-4 px-5 py-4">
+                <div className="w-11 h-11 rounded-xl flex-shrink-0 animate-pulse"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }} />
+                <div className="flex-1 space-y-2 pt-1">
+                  <div className="h-3.5 rounded-md animate-pulse w-36" style={{ background: "rgba(255,255,255,0.05)" }} />
+                  <div className="h-2.5 rounded-md animate-pulse w-24" style={{ background: "rgba(255,255,255,0.03)" }} />
+                  <div className="h-2 rounded-md animate-pulse w-48" style={{ background: "rgba(255,255,255,0.03)" }} />
+                </div>
               </div>
             )}
           </div>
 
           {/* ── Footer ── */}
-          <div className="border-t border-white/[0.06] px-5 py-2.5 flex items-center justify-between">
-            <span className="font-mono text-[8px] text-[#64748b] tracking-wider uppercase">
-              {JOURNEY.length} Chapters · {JOURNEY.filter(j => !j.active).length} Complete
-            </span>
-            <span className="font-mono text-[9px] font-bold text-[#14b8a6]">
-              ◆ Level {LEVEL} Engineer
-            </span>
+          <div className="border-t border-white/[0.06] px-5 py-3 flex items-center justify-between"
+            style={{ background: "rgba(255,255,255,0.01)" }}>
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
+              <span className="font-sans text-[11px] text-[#475569]">Currently · Goalzen Capital Services</span>
+            </div>
+            <span className="font-mono text-[9px] text-[#334155]">Hyderabad, IN</span>
           </div>
         </div>
       </div>
