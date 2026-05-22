@@ -97,7 +97,7 @@ export default function Header({ currentTab, setTab }: HeaderProps) {
                 onClick={() => setTab(tab.id)}
                 onMouseEnter={() => setHoveredTab(tab.id)}
                 onMouseLeave={() => setHoveredTab(null)}
-                className="relative px-4 py-[7px] rounded-xl font-mono text-[9px] tracking-widest uppercase transition-all duration-200 select-none"
+                className="relative px-4 py-[7px] rounded-xl font-mono text-[10px] font-semibold tracking-widest uppercase transition-all duration-200 select-none"
                 style={
                   isActive ? {
                     background: "linear-gradient(135deg, #14b8a6 0%, #0d9488 45%, #2dd4bf 100%)",
@@ -106,11 +106,13 @@ export default function Header({ currentTab, setTab }: HeaderProps) {
                     transform: "translateY(-1px)",
                     boxShadow: "0 0 16px rgba(45,212,191,0.45), 0 4px 16px rgba(13,148,136,0.3), 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.35)"
                   } : isHovered ? {
-                    background: "rgba(255,255,255,0.055)",
-                    color: "#e7e0ed",
-                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)"
+                    background: "rgba(255,255,255,0.07)",
+                    color: "#f1f5f9",
+                    fontWeight: 600,
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)"
                   } : {
-                    color: "#7a7389",
+                    color: "#94a3b8",
+                    fontWeight: 600,
                   }
                 }
               >
