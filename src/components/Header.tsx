@@ -70,7 +70,7 @@ export default function Header({ currentTab, setTab }: HeaderProps) {
             >
               DIKSHANT.CORE
             </h1>
-            <span className="font-mono text-[7.5px] tracking-[0.28em] uppercase text-[#2dd4bf]/45">
+            <span className="font-mono text-[9px] font-semibold tracking-[0.22em] uppercase text-[#2dd4bf]">
               SWE // IIT KANPUR
             </span>
           </div>
