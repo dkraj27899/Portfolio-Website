@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Terminal, ArrowRight, Download, MapPin, GraduationCap, Building2 } from "lucide-react";
+import { ArrowRight, Download, MapPin, GraduationCap, Building2 } from "lucide-react";
 
 const GitHubIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -18,48 +18,82 @@ const STATS = [
   { value: "2,000+", label: "Schemes", sub: "Tracked"   },
 ];
 
+const JOURNEY = [
+  {
+    id: "ch01", chapter: "01", type: "education",
+    label: "ORIGIN STORY",
+    title: "B.Tech · Computer Science",
+    org: "IIT Kanpur",
+    period: "2018 – 2023",
+    color: "#3b82f6",
+    stats: [{ label: "AIR", value: "32" }, { label: "Batch", value: "'23" }],
+    tags: ["C++", "Algorithms", "Data Structures"],
+    xp: 1200,
+    active: false,
+  },
+  {
+    id: "ch02", chapter: "02", type: "work",
+    label: "FIRST DEPLOY",
+    title: "Web Developer",
+    org: "The Smart Traveller",
+    period: "Jun 2022",
+    color: "#f59e0b",
+    stats: [{ label: "Stack", value: "React" }],
+    tags: ["React", "Redux", "Firebase", "G-Maps"],
+    xp: 600,
+    active: false,
+  },
+  {
+    id: "ch03", chapter: "03", type: "work",
+    label: "PRODUCTION LAUNCH",
+    title: "Software Developer",
+    org: "Goalzen Capital Services",
+    period: "Sep 2024",
+    color: "#14b8a6",
+    stats: [{ label: "Product", value: "Smallcase" }],
+    tags: ["Node.js", "React", "Analytics", "Quant"],
+    xp: 1400,
+    active: false,
+  },
+  {
+    id: "ch04", chapter: "04", type: "current",
+    label: "SENIOR MODE",
+    title: "Senior Software Developer",
+    org: "Goalzen Capital Services",
+    period: "Jul 2025 → NOW",
+    color: "#2dd4bf",
+    stats: [{ label: "AMCs", value: "47+" }, { label: "Schemes", value: "2K+" }],
+    tags: ["Pandas", "ETL", "Express", "MF Analytics"],
+    xp: 2200,
+    active: true,
+  },
+];
+
+const TOTAL_XP  = JOURNEY.reduce((s, j) => s + j.xp, 0);
+const MAX_XP    = 6000;
+const LEVEL     = Math.floor(TOTAL_XP / 1200) + 1;
+
 export default function IntroView({ setTab }: { setTab: (tab: string) => void }) {
-  const [journeyLogs, setJourneyLogs]   = useState<string[]>([]);
-  const [cursorOn, setCursorOn]         = useState(true);
-  const logsContainerRef                = useRef<HTMLDivElement>(null);
-  const logsEndRef                      = useRef<HTMLDivElement>(null);
+  const [cursorOn,     setCursorOn]     = useState(true);
+  const [visibleCount, setVisibleCount] = useState(0);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
-  const fullLogs = [
-    "> Executing profile_init.sh...",
-    "> Loading academic records...",
-    "  [SUCCESS] B.Tech in Computer Science, IIT Kanpur (Class of 2023)",
-    "  [INFO] JEE Advanced 2018: AIR 32 (ST Category)",
-    "  [INFO] JEE Advanced 2018: AIR 4754 Overall",
-    "> Initializing professional experience...",
-    "  [June 2022] Web Developer @ The Smart Traveller",
-    "      - Designed UIs with React/Redux and integrated G-Maps.",
-    "      - Implemented Firebase Cloud Messaging.",
-    "  [Sep 2024] Software Developer @ Goalzen Capital Services",
-    "      - Built Smallcase Tracking & Analytics with Node.js & React.",
-    "      - Designed quantitative optimization pipelines.",
-    "  [July 2025] Promoted to Senior Software Developer @ Goalzen",
-    "      - Engineered scalable ETL pipelines using Pandas for 47+ AMCs.",
-    "      - Developed Node.js/Express backend for mutual fund tracking.",
-    "> Profile loaded successfully.",
-    "> Current status: Open to new opportunities."
-  ];
-
-  // Typewriter
+  // Sequential card reveal
   useEffect(() => {
-    let idx = 0;
+    let count = 0;
     const iv = setInterval(() => {
-      setJourneyLogs(fullLogs.slice(0, idx + 1));
-      idx++;
-      if (idx === fullLogs.length) clearInterval(iv);
-    }, 450);
+      count++;
+      setVisibleCount(count);
+      if (count >= JOURNEY.length) clearInterval(iv);
+    }, 750);
     return () => clearInterval(iv);
   }, []);
 
-  // Auto-scroll terminal
+  // Scroll cards container as new cards appear
   useEffect(() => {
-    if (logsContainerRef.current)
-      logsContainerRef.current.scrollTop = logsContainerRef.current.scrollHeight;
-  }, [journeyLogs]);
+    if (cardsRef.current)
+      cardsRef.current.scrollTop = cardsRef.current.scrollHeight;
+  }, [visibleCount]);
 
   // Blinking cursor for role title
   useEffect(() => {
@@ -217,68 +251,173 @@ export default function IntroView({ setTab }: { setTab: (tab: string) => void })
         </div>
       </div>
 
-      {/* ═══════════════ RIGHT — Journey Terminal ═══════════════ */}
+      {/* ═══════════════ RIGHT — Career Quest Log ═══════════════ */}
       <div className="flex-1 w-full max-w-xl">
         <div
-          className="relative rounded-2xl overflow-hidden flex flex-col min-h-[460px]"
+          className="rounded-2xl overflow-hidden flex flex-col"
           style={{
-            background: "linear-gradient(145deg, rgba(21,18,27,0.9), rgba(15,13,21,0.95))",
-            border: "1px solid rgba(255,255,255,0.06)",
-            boxShadow: "0 0 60px rgba(0,0,0,0.7), 0 0 30px rgba(45,212,191,0.04), inset 0 1px 0 rgba(255,255,255,0.06)"
+            background: "linear-gradient(145deg, rgba(11,17,32,0.96), rgba(5,7,15,0.98))",
+            border: "1px solid rgba(255,255,255,0.07)",
+            boxShadow: "0 0 60px rgba(0,0,0,0.7), 0 0 30px rgba(20,184,166,0.06), inset 0 1px 0 rgba(255,255,255,0.06)"
           }}
         >
-          {/* CRT scanline overlay */}
-          <div className="absolute inset-0 pointer-events-none opacity-40 z-10"
-               style={{ background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px)" }} />
-
-          {/* Window chrome */}
-          <div className="relative z-20 flex justify-between items-center px-5 py-3.5 border-b border-white/[0.06]">
-            <div className="flex items-center gap-2.5">
+          {/* ── Header bar ── */}
+          <div className="flex justify-between items-center px-5 py-3 border-b border-white/[0.06]">
+            <div className="flex items-center gap-3">
               <div className="flex gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
               </div>
-              <span className="font-mono text-[9px] text-[#2dd4bf]/70 tracking-widest uppercase ml-2 flex items-center gap-1.5">
-                <Terminal className="w-3 h-3" /> dikshant@portfolio:~$
+              <span className="font-mono text-[9px] text-[#2dd4bf]/60 tracking-widest uppercase ml-1">
+                CAREER.LOG — DIKSHANT.EXE
               </span>
             </div>
-            <span className="font-mono text-[8px] text-[#64748b] flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" /> LIVE
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[9px] font-bold text-[#f59e0b]">LVL {LEVEL}</span>
+              <span className="font-mono text-[8px] text-[#64748b]">{TOTAL_XP.toLocaleString()} XP</span>
+            </div>
           </div>
 
-          {/* Log output */}
+          {/* ── XP bar ── */}
+          <div className="px-5 pt-3 pb-2.5 border-b border-white/[0.04]">
+            <div className="flex justify-between font-mono text-[8px] text-[#64748b] mb-1.5 tracking-widest uppercase">
+              <span>Total Experience</span>
+              <span>{TOTAL_XP.toLocaleString()} / {MAX_XP.toLocaleString()} XP</span>
+            </div>
+            <div className="h-1.5 rounded-full overflow-hidden border border-white/5" style={{ background: "#05070f" }}>
+              <div
+                className="h-full rounded-full transition-all duration-[2000ms]"
+                style={{
+                  width: `${(TOTAL_XP / MAX_XP) * 100}%`,
+                  background: "linear-gradient(90deg, #3b82f6, #14b8a6, #2dd4bf, #f59e0b)",
+                  boxShadow: "0 0 8px rgba(45,212,191,0.5)"
+                }}
+              />
+            </div>
+          </div>
+
+          {/* ── Chapter cards ── */}
           <div
-            ref={logsContainerRef}
-            className="relative z-20 flex-1 overflow-y-auto p-5 font-mono text-xs leading-relaxed text-[#cbd5e1] space-y-1"
-            style={{ background: "rgba(10,8,18,0.6)", minHeight: "380px" }}
+            ref={cardsRef}
+            className="flex-1 overflow-y-auto p-4 space-y-3"
+            style={{ minHeight: "340px" }}
           >
-            {journeyLogs.map((log, lIdx) => {
-              const isCommand = log.startsWith(">");
-              return (
-                <div key={lIdx} className={`flex gap-2 items-start ${isCommand ? "text-[#2dd4bf] mt-2" : ""}`}>
-                  <p className="text-left whitespace-pre-wrap flex-1">
-                    {isCommand
-                      ? <span className="font-bold">{log}</span>
-                      : <span>
-                          {log.split(/(\[.*?\])/).map((part, i) => {
-                            if (part.includes("[SUCCESS]")) return <span key={i} className="text-green-400 font-bold">{part}</span>;
-                            if (part.includes("[INFO]"))    return <span key={i} className="text-blue-400 font-bold">{part}</span>;
-                            if (part.match(/\[.*?\]/))      return <span key={i} className="text-[#f59e0b] font-bold">{part}</span>;
-                            return part;
-                          })}
-                        </span>
-                    }
-                  </p>
+            {JOURNEY.slice(0, visibleCount).map((item, idx) => (
+              <div
+                key={item.id}
+                className="relative flex gap-3 p-3.5 rounded-xl"
+                style={{
+                  background: item.active
+                    ? `linear-gradient(135deg, ${item.color}12, ${item.color}05)`
+                    : `${item.color}07`,
+                  border: `1px solid ${item.color}${item.active ? "40" : "22"}`,
+                  boxShadow: item.active ? `0 0 24px ${item.color}14` : "none",
+                  animation: "fadeSlideIn 0.4s ease forwards",
+                }}
+              >
+                {/* Vertical connector to next card */}
+                {idx < JOURNEY.length - 1 && (
+                  <div
+                    className="absolute left-[27px] rounded-full"
+                    style={{
+                      top: "52px", width: "1px",
+                      height: "calc(100% + 10px)",
+                      background: `linear-gradient(to bottom, ${item.color}40, transparent)`,
+                      zIndex: 0,
+                    }}
+                  />
+                )}
+
+                {/* Chapter badge */}
+                <div
+                  className="relative z-10 flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-mono font-black text-[11px]"
+                  style={{
+                    background: `${item.color}22`,
+                    border: `1px solid ${item.color}45`,
+                    color: item.color,
+                    boxShadow: `0 0 12px ${item.color}25`,
+                  }}
+                >
+                  {item.chapter}
                 </div>
-              );
-            })}
-            <span
-              className="inline-block w-2 h-[14px] bg-[#2dd4bf] ml-1 align-middle"
-              style={{ opacity: cursorOn ? 1 : 0, transition: "opacity 0.1s" }}
-            />
-            <div ref={logsEndRef} />
+
+                {/* Content */}
+                <div className="flex-1 min-w-0 relative z-10">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <div>
+                      <p className="font-mono text-[8px] uppercase tracking-[0.18em] font-semibold" style={{ color: item.color }}>
+                        {item.label}
+                      </p>
+                      <h4 className="font-sans font-bold text-[13px] text-white leading-tight mt-0.5">{item.title}</h4>
+                      <p className="font-mono text-[10px] text-[#94a3b8] mt-0.5">{item.org} · {item.period}</p>
+                    </div>
+                    {item.active && (
+                      <span
+                        className="flex-shrink-0 flex items-center gap-1.5 text-[8px] font-mono font-bold px-2 py-1 rounded-md"
+                        style={{ background: "rgba(45,212,191,0.12)", color: "#2dd4bf", border: "1px solid rgba(45,212,191,0.28)" }}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#2dd4bf] animate-pulse" />
+                        ACTIVE
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Stat chips + tech tags */}
+                  <div className="flex flex-wrap gap-1.5 mt-2">
+                    {item.stats.map(s => (
+                      <span
+                        key={s.label}
+                        className="font-mono text-[9px] px-2 py-0.5 rounded-md font-semibold"
+                        style={{ background: `${item.color}18`, color: item.color, border: `1px solid ${item.color}28` }}
+                      >
+                        {s.value} {s.label}
+                      </span>
+                    ))}
+                    {item.tags.map(t => (
+                      <span
+                        key={t}
+                        className="font-mono text-[9px] px-2 py-0.5 rounded-md text-[#64748b]"
+                        style={{ background: "rgba(255,255,255,0.035)", border: "1px solid rgba(255,255,255,0.07)" }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Per-card XP bar */}
+                  <div className="mt-2.5 flex items-center gap-2">
+                    <div className="flex-1 h-0.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                      <div
+                        className="h-full rounded-full"
+                        style={{ width: `${(item.xp / MAX_XP) * 100}%`, background: item.color, boxShadow: `0 0 4px ${item.color}60` }}
+                      />
+                    </div>
+                    <span className="font-mono text-[8px] flex-shrink-0 font-semibold" style={{ color: item.color }}>
+                      +{item.xp.toLocaleString()} XP
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Loading next chapter */}
+            {visibleCount < JOURNEY.length && (
+              <div className="flex items-center gap-2 font-mono text-[10px] text-[#2dd4bf]/40 px-1 py-1">
+                <span className="inline-block w-1.5 h-3 bg-[#2dd4bf]/40 rounded-sm animate-pulse" />
+                <span>Loading chapter {String(visibleCount + 1).padStart(2, "0")}...</span>
+              </div>
+            )}
+          </div>
+
+          {/* ── Footer ── */}
+          <div className="border-t border-white/[0.06] px-5 py-2.5 flex items-center justify-between">
+            <span className="font-mono text-[8px] text-[#64748b] tracking-wider uppercase">
+              {JOURNEY.length} Chapters · {JOURNEY.filter(j => !j.active).length} Complete
+            </span>
+            <span className="font-mono text-[9px] font-bold text-[#14b8a6]">
+              ◆ Level {LEVEL} Engineer
+            </span>
           </div>
         </div>
       </div>
