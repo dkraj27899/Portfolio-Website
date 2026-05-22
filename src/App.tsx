@@ -31,22 +31,30 @@ export default function App() {
   }, []);
 
   return (
-    <div 
-      className="min-h-screen bg-[#05070f] text-[#e2e8f0] font-sans selection:bg-[#14b8a6]/25 relative overflow-x-hidden flex flex-col justify-between"
-      style={{
-        backgroundImage: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(20, 184, 166, 0.04) 0%, transparent 45%)`
-      }}
+    <div
+      className="min-h-screen text-[#e2e8f0] font-sans selection:bg-[#14b8a6]/25 relative overflow-x-hidden flex flex-col justify-between"
+      style={{ isolation: "isolate" }}
       id="app-root-shell"
     >
-      {/* Dynamic Background Blurs */}
-      <div className="absolute top-[-100px] left-[-100px] w-[500px] h-[500px] bg-[#14b8a6]/5 rounded-full blur-[150px] animate-pulse-slow pointer-events-none" />
-      <div className="absolute top-[40%] right-[-200px] w-[600px] h-[600px] bg-[#f59e0b]/4 rounded-full blur-[180px] animate-pulse-slow pointer-events-none" />
+      {/* Mouse-tracking spotlight over the dot grid */}
+      <div
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle 700px at ${mousePosition.x}% ${mousePosition.y}%, rgba(20,184,166,0.055) 0%, transparent 70%)`,
+          zIndex: 1,
+        }}
+      />
+
+      {/* Ambient glow blobs */}
+      <div className="fixed top-[-100px] left-[-100px] w-[500px] h-[500px] bg-[#14b8a6]/6 rounded-full blur-[160px] animate-pulse-slow pointer-events-none" style={{ zIndex: 1 }} />
+      <div className="fixed top-[40%] right-[-200px] w-[600px] h-[600px] bg-[#f59e0b]/5 rounded-full blur-[200px] animate-pulse-slow pointer-events-none" style={{ zIndex: 1 }} />
+      <div className="fixed bottom-[-100px] left-[30%] w-[400px] h-[400px] bg-[#2dd4bf]/4 rounded-full blur-[140px] animate-pulse-slow pointer-events-none" style={{ zIndex: 1 }} />
 
       {/* Persistent High-Fidelity App Bar Header */}
       <Header currentTab={currentTab} setTab={setTab} />
 
       {/* Main Container Workspace */}
-      <main className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto w-full flex-1">
+      <main className="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto w-full flex-1 relative" style={{ zIndex: 2 }}>
         {currentTab === "intro" && (
           <IntroView setTab={setTab} />
         )}
@@ -81,7 +89,9 @@ export default function App() {
       )}
 
       {/* Footer corporate references */}
-      <Footer setTab={setTab} />
+      <div className="relative" style={{ zIndex: 2 }}>
+        <Footer setTab={setTab} />
+      </div>
 
       {/* Sticky Bottom Nav Bar (visible on mobile formats) */}
       <BottomNavBar currentTab={currentTab} setTab={setTab} />
