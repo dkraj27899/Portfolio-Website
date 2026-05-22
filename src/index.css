@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  /* Color Palette matching the custom theme config */
+  --color-background: #15121b;
+  --color-surface: #15121b;
+  --color-surface-dim: #15121b;
+  --color-surface-bright: #3b3742;
+  --color-surface-container-lowest: #0f0d15;
+  --color-surface-container-low: #1d1a23;
+  --color-surface-container: #211e27;
+  --color-surface-container-high: #2c2832;
+  --color-surface-container-highest: #37333d;
+  --color-on-surface: #e7e0ed;
+  --color-on-surface-variant: #cbc3d7;
+  --color-inverse-surface: #e7e0ed;
+  --color-inverse-on-surface: #322f39;
+  --color-outline: #958ea0;
+  --color-outline-variant: #494454;
+  --color-surface-tint: #d0bcff;
+  
+  --color-primary: #d0bcff;
+  --color-on-primary: #3c0091;
+  --color-primary-container: #a078ff;
+  --color-on-primary-container: #340080;
+  --color-inverse-primary: #6d3bd7;
+  
+  --color-secondary: #5de6ff;
+  --color-on-secondary: #00363e;
+  --color-secondary-container: #00cbe6;
+  --color-on-secondary-container: #00515d;
+  
+  --color-tertiary: #ffb869;
+  --color-on-tertiary: #482900;
+  --color-tertiary-container: #ca801e;
+  --color-on-tertiary-container: #3f2300;
+  
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD9YHwd2XsJHG3w2wRS_jugnW77imdd0aqpJ5GgKFnHPJ3FU8GffSUbLirfn0LYSgEjIcSxJ4q3OaffpyQX-aCa18jell_BYEa2-H_CVttKjxPpSllowrKa1YE_WosHLs-yMegmeTGrZVTwOQiDt8JZe63guJcGU68ecQWLnOStbbYI1UOLmzZX9XD6SDe-hnJ0n13yuqGIKxd0QTLi66Gbz6Jv-9WBsBVRYqr6LQBRw8mi_NIZJG97yzD24emrc8C2R7wscNvWHcU);
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .inner-glow {
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  }
+  
+  .glow-shadow-primary {
+    box-shadow: 0 0 25px rgba(208, 188, 255, 0.1);
+  }
+  
+  .glow-shadow-secondary {
+    box-shadow: 0 0 25px rgba(93, 230, 255, 0.1);
+  }
+  
+  /* Scrollbar Customization */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f0d15;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #494454;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #5de6ff;
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.1); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
