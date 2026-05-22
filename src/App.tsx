@@ -32,15 +32,15 @@ export default function App() {
 
   return (
     <div 
-      className="min-h-screen bg-[#15121b] text-[#e7e0ed] font-sans selection:bg-[#a078ff]/30 relative overflow-x-hidden flex flex-col justify-between"
+      className="min-h-screen bg-[#05070f] text-[#e2e8f0] font-sans selection:bg-[#14b8a6]/25 relative overflow-x-hidden flex flex-col justify-between"
       style={{
-        backgroundImage: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(109, 59, 215, 0.03) 0%, transparent 45%)`
+        backgroundImage: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(20, 184, 166, 0.04) 0%, transparent 45%)`
       }}
       id="app-root-shell"
     >
       {/* Dynamic Background Blurs */}
-      <div className="absolute top-[-100px] left-[-100px] w-[500px] h-[500px] bg-[#d0bcff]/5 rounded-full blur-[150px] animate-pulse-slow pointer-events-none" />
-      <div className="absolute top-[40%] right-[-200px] w-[600px] h-[600px] bg-[#5de6ff]/5 rounded-full blur-[180px] animate-pulse-slow pointer-events-none" />
+      <div className="absolute top-[-100px] left-[-100px] w-[500px] h-[500px] bg-[#14b8a6]/5 rounded-full blur-[150px] animate-pulse-slow pointer-events-none" />
+      <div className="absolute top-[40%] right-[-200px] w-[600px] h-[600px] bg-[#f59e0b]/4 rounded-full blur-[180px] animate-pulse-slow pointer-events-none" />
 
       {/* Persistent High-Fidelity App Bar Header */}
       <Header currentTab={currentTab} setTab={setTab} />

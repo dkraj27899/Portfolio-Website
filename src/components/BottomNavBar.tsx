@@ -7,14 +7,14 @@ interface BottomNavBarProps {
 
 export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) {
   return (
-    <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full w-[90%] max-w-[400px] bg-[#211e27]/80 backdrop-blur-2xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.8)] z-50 flex items-center justify-between px-4 py-2.5" id="mobile-floating-navigation-bar">
+    <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full w-[90%] max-w-[400px] bg-[#111827]/80 backdrop-blur-2xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.8)] z-50 flex items-center justify-between px-4 py-2.5" id="mobile-floating-navigation-bar">
       {/* Tab: INTRO */}
       <button
         onClick={() => setTab("intro")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "intro"
-            ? "bg-[#d0bcff]/20 text-[#d0bcff] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#d0bcff]/20"
-            : "text-[#cbc3d7] hover:text-[#5de6ff]"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Home"
       >
@@ -26,8 +26,8 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("projects")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "projects"
-            ? "bg-[#d0bcff]/20 text-[#d0bcff] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#d0bcff]/20"
-            : "text-[#cbc3d7] hover:text-[#5de6ff]"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Featured Projects"
         id="mobile-nav-projects"
@@ -40,8 +40,8 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("timeline")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "timeline"
-            ? "bg-[#d0bcff]/20 text-[#d0bcff] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#d0bcff]/20"
-            : "text-[#cbc3d7] hover:text-[#5de6ff]"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Project Timeline"
         id="mobile-nav-timeline"
@@ -54,8 +54,8 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("stack")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "stack"
-            ? "bg-[#d0bcff]/20 text-[#d0bcff] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#d0bcff]/20"
-            : "text-[#cbc3d7] hover:text-[#5de6ff]"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Technical Stack"
         id="mobile-nav-stack"
@@ -68,8 +68,8 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("network")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "network"
-            ? "bg-[#d0bcff]/20 text-[#d0bcff] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#d0bcff]/20"
-            : "text-[#cbc3d7] hover:text-[#5de6ff]"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Network Telemetry"
         id="mobile-nav-network"
@@ -82,8 +82,8 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("contact")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "contact"
-            ? "bg-[#d0bcff]/20 text-[#d0bcff] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#d0bcff]/20"
-            : "text-[#cbc3d7] hover:text-[#5de6ff]"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Contact Me"
         id="mobile-nav-contact"

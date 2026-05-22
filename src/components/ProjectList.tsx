@@ -32,11 +32,11 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
     <div id="project-list-container">
       {/* Featured Header & Intro */}
       <section className="mb-16 text-center animate-fade-in">
-        <h2 className="font-sans font-black text-4xl md:text-6xl text-[#d0bcff] mb-6 tracking-tight uppercase relative inline-block">
+        <h2 className="font-sans font-black text-4xl md:text-6xl text-[#14b8a6] mb-6 tracking-tight uppercase relative inline-block">
           FEATURED_BUILDS
-          <div className="absolute -inset-1 rounded bg-[#d0bcff]/10 blur-xl opacity-50 z-[-1]" />
+          <div className="absolute -inset-1 rounded bg-[#14b8a6]/10 blur-xl opacity-50 z-[-1]" />
         </h2>
-        <p className="max-w-2xl mx-auto text-[#cbc3d7] font-sans text-sm md:text-base leading-relaxed">
+        <p className="max-w-2xl mx-auto text-[#cbd5e1] font-sans text-sm md:text-base leading-relaxed">
           A showcase of high-performance architectural solutions and experimental interfaces. Each project represents a milestone in technical precision and aesthetic execution.
         </p>
       </section>
@@ -46,28 +46,28 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
         <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
           {/* Search Input */}
           <div className="relative w-full md:w-1/2">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#cbc3d7]" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#cbd5e1]" />
             <input
               type="text"
               placeholder="Query kernel (tags, title, systems...)"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#15121b]/60 text-white pl-10 pr-4 py-2 text-xs font-mono rounded-lg border border-white/10 focus:border-[#5de6ff] focus:ring-1 focus:ring-[#5de6ff] focus:outline-none transition-all"
+              className="w-full bg-[#05070f]/60 text-white pl-10 pr-4 py-2 text-xs font-mono rounded-lg border border-white/10 focus:border-[#2dd4bf] focus:ring-1 focus:ring-[#2dd4bf] focus:outline-none transition-all"
               id="search-input-field"
             />
           </div>
 
           {/* Tags Filtering */}
           <div className="flex flex-wrap gap-2 items-center w-full md:w-auto overflow-x-auto py-1">
-            <span className="text-[10px] uppercase font-mono tracking-widest text-[#cbc3d7] flex items-center gap-1 mr-1">
+            <span className="text-[10px] uppercase font-mono tracking-widest text-[#cbd5e1] flex items-center gap-1 mr-1">
               <SlidersHorizontal className="w-3" /> Filters:
             </span>
             <button
               onClick={() => setSelectedTag(null)}
               className={`px-3 py-1 rounded-full text-[10px] font-mono tracking-wider transition-all uppercase ${
                 selectedTag === null
-                  ? "bg-[#5de6ff]/20 text-[#5de6ff] border border-[#5de6ff]/50"
-                  : "bg-white/5 text-[#cbc3d7] border border-white/10 hover:border-white/20"
+                  ? "bg-[#2dd4bf]/20 text-[#2dd4bf] border border-[#2dd4bf]/50"
+                  : "bg-white/5 text-[#cbd5e1] border border-white/10 hover:border-white/20"
               }`}
               id="filter-tag-all"
             >
@@ -79,8 +79,8 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
                 onClick={() => setSelectedTag(tag)}
                 className={`px-3 py-1 rounded-full text-[10px] font-mono tracking-wider transition-all uppercase ${
                   selectedTag === tag
-                    ? "bg-[#5de6ff]/20 text-[#5de6ff] border border-[#5de6ff]/50"
-                    : "bg-white/5 text-[#cbc3d7] border border-white/10 hover:border-[#d0bcff]/30"
+                    ? "bg-[#2dd4bf]/20 text-[#2dd4bf] border border-[#2dd4bf]/50"
+                    : "bg-white/5 text-[#cbd5e1] border border-white/10 hover:border-[#14b8a6]/30"
                 }`}
                 id={`filter-tag-${tag.toLowerCase()}`}
               >
@@ -94,15 +94,15 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
       {/* Vertical Stack of Glassmorphic Alternating Cards */}
       <div className="flex flex-col gap-12 relative max-w-5xl mx-auto">
         {/* Glow leaks */}
-        <div className="absolute -top-16 -left-16 w-48 h-48 bg-[#d0bcff]/10 blur-[80px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/2 -right-16 w-64 h-64 bg-[#5de6ff]/80 blur-[120px] rounded-full opacity-10 pointer-events-none" />
+        <div className="absolute -top-16 -left-16 w-48 h-48 bg-[#14b8a6]/10 blur-[80px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 -right-16 w-64 h-64 bg-[#2dd4bf]/80 blur-[120px] rounded-full opacity-10 pointer-events-none" />
 
         {/* Dynamic empty state */}
         {filteredProjects.length === 0 && (
           <div className="glass-card text-center py-16 rounded-xl border border-white/10">
-            <Layers className="w-12 h-12 text-[#958ea0] mx-auto mb-4 animate-bounce" />
+            <Layers className="w-12 h-12 text-[#64748b] mx-auto mb-4 animate-bounce" />
             <h4 className="font-mono text-xs tracking-widest text-white uppercase mb-2">No matching systems identified</h4>
-            <p className="text-xs text-[#cbc3d7]">Relax filters or redefine query syntax parameters.</p>
+            <p className="text-xs text-[#cbd5e1]">Relax filters or redefine query syntax parameters.</p>
           </div>
         )}
 
@@ -111,7 +111,7 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
           return (
             <div
               key={project.id}
-              className={`glass-card inner-glow rounded-xl p-6 md:p-10 group hover:border-[#d0bcff]/40 transition-all duration-500 transform hover:-translate-y-1.5 flex flex-col ${
+              className={`glass-card inner-glow rounded-xl p-6 md:p-10 group hover:border-[#14b8a6]/40 transition-all duration-500 transform hover:-translate-y-1.5 flex flex-col ${
                 isOdd ? "md:flex-row-reverse" : "md:flex-row"
               } gap-8 md:gap-12 items-center`}
               id={`project-card-${project.id}`}
@@ -125,8 +125,8 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   id={`project-image-${project.id}`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#15121b]/80 to-transparent" />
-                <div className="absolute top-3 left-3 bg-[#15121b]/80 border border-white/10 px-2.5 py-1 rounded font-mono text-[9px] text-[#5de6ff]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05070f]/80 to-transparent" />
+                <div className="absolute top-3 left-3 bg-[#05070f]/80 border border-white/10 px-2.5 py-1 rounded font-mono text-[9px] text-[#2dd4bf]">
                   CORE_MODULE_0{index + 1}
                 </div>
               </div>
@@ -138,7 +138,7 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-0.5 rounded-full border border-[#5de6ff]/20 bg-[#5de6ff]/5 font-mono text-[10px] text-[#5de6ff]"
+                      className="px-2.5 py-0.5 rounded-full border border-[#2dd4bf]/20 bg-[#2dd4bf]/5 font-mono text-[10px] text-[#2dd4bf]"
                     >
                       {tag}
                     </span>
@@ -151,7 +151,7 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
                 </h3>
 
                 {/* Abstract */}
-                <p className="text-[#cbc3d7] font-sans text-xs md:text-sm leading-relaxed text-justify">
+                <p className="text-[#cbd5e1] font-sans text-xs md:text-sm leading-relaxed text-justify">
                   {project.description}
                 </p>
 
@@ -159,7 +159,7 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   {project.metrics.slice(0, 2).map((metric, mIdx) => (
                     <div key={mIdx} className="bg-white/5 border border-white/5 p-2 rounded">
-                      <div className="font-mono text-[9px] tracking-wider text-[#958ea0] uppercase">
+                      <div className="font-mono text-[9px] tracking-wider text-[#64748b] uppercase">
                         {metric.label}
                       </div>
                       <div className="font-mono font-bold text-xs text-white">
@@ -173,7 +173,7 @@ export default function ProjectList({ onSelectProject }: ProjectListProps) {
                 <div>
                   <button
                     onClick={() => onSelectProject(project)}
-                    className="inline-flex items-center gap-2 font-mono text-[11px] tracking-widest text-[#d0bcff] hover:text-[#5de6ff] group-hover:gap-3.5 transition-all text-left uppercase"
+                    className="inline-flex items-center gap-2 font-mono text-[11px] tracking-widest text-[#14b8a6] hover:text-[#2dd4bf] group-hover:gap-3.5 transition-all text-left uppercase"
                     id={`trigger-modal-${project.id}`}
                   >
                     VIEW CASE STUDY
