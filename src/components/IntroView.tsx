@@ -74,14 +74,18 @@ export default function IntroView({ setTab }: { setTab: (tab: string) => void })
       <div className="flex-1 space-y-7 text-center lg:text-left">
 
         {/* ── Hire badge ── */}
-        <div className="inline-flex items-center gap-2 border border-[#2dd4bf]/30 bg-[#2dd4bf]/8 px-3.5 py-1.5 rounded-full">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2dd4bf] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2dd4bf]" />
-          </span>
-          <span className="font-mono text-[10px] text-[#2dd4bf] uppercase tracking-[0.25em]">
-            Available for Hire
-          </span>
+        <div
+          className="inline-flex items-center gap-3 px-4 py-2 rounded-lg font-mono text-[10px]"
+          style={{
+            background: "rgba(20,184,166,0.05)",
+            border: "1px solid rgba(20,184,166,0.18)",
+            borderLeft: "3px solid #14b8a6",
+          }}
+        >
+          <span className="text-[#14b8a6] font-bold select-none">&gt;_</span>
+          <span className="text-[#2dd4bf] font-semibold tracking-[0.2em] uppercase">Open to Work</span>
+          <span className="text-white/20 select-none">·</span>
+          <span className="text-[#94a3b8] tracking-wider uppercase">Full-Stack · Remote OK</span>
         </div>
 
         {/* ── Role title — the hero ── */}

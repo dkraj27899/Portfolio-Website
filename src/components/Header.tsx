@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Terminal } from "lucide-react";
 
 interface HeaderProps {
@@ -17,6 +17,16 @@ const NAV_TABS = [
 
 export default function Header({ currentTab, setTab }: HeaderProps) {
   const [hoveredTab, setHoveredTab] = useState<string | null>(null);
+  const [istTime, setIstTime] = useState(() =>
+    new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kolkata", hour12: false })
+  );
+
+  useEffect(() => {
+    const iv = setInterval(() =>
+      setIstTime(new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kolkata", hour12: false }))
+    , 1000);
+    return () => clearInterval(iv);
+  }, []);
 
   return (
     <header className="fixed top-0 w-full z-50">
@@ -129,23 +139,27 @@ export default function Header({ currentTab, setTab }: HeaderProps) {
           })}
         </nav>
 
-        {/* ── Status pill ── */}
+        {/* ── Status pill — live IST clock + heartbeat ── */}
         <div
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full"
+          className="hidden md:flex items-center gap-2.5 px-3 py-1.5 rounded-lg"
           style={{
             background: "linear-gradient(145deg, rgba(15,13,21,0.9), rgba(21,18,27,0.8))",
             border: "1px solid rgba(45,212,191,0.18)",
             boxShadow: "0 0 18px rgba(45,212,191,0.07), inset 0 1px 0 rgba(255,255,255,0.04)"
           }}
         >
-          {/* Double-ring pulse */}
-          <div className="relative w-2 h-2 flex-shrink-0">
-            <span className="absolute inset-[-3px] rounded-full border border-[#2dd4bf]/25 animate-ping" />
-            <span className="absolute inset-[-1px] rounded-full bg-[#2dd4bf]/20 animate-pulse" />
-            <span className="relative block w-full h-full rounded-full bg-[#2dd4bf]" />
+          {/* Heartbeat bars */}
+          <div className="flex items-center gap-[2px]">
+            {[3, 8, 5, 12, 5, 8, 3].map((h, i) => (
+              <span
+                key={i}
+                className="w-[2px] rounded-full bg-[#2dd4bf] animate-pulse"
+                style={{ height: `${h}px`, animationDelay: `${i * 0.1}s`, animationDuration: "1.4s" }}
+              />
+            ))}
           </div>
-          <span className="font-mono text-[9px] tracking-wider text-[#2dd4bf] uppercase">
-            ONLINE
+          <span className="font-mono text-[9px] tracking-wider text-[#2dd4bf]">
+            {istTime} <span className="text-[#2dd4bf]/50">IST</span>
           </span>
         </div>
 
