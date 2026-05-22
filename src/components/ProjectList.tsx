@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Project } from "../types";
 import { projectsData } from "../data";
-import { ArrowRight, Search, SlidersHorizontal, Layers, Sparkles } from "lucide-react";
+import { ArrowRight, Search, SlidersHorizontal, Layers } from "lucide-react";
 
 interface ProjectListProps {
   onSelectProject: (project: Project) => void;

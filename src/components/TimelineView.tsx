@@ -38,8 +38,8 @@ export default function TimelineView({
                 {/* SVG Node graphic placed precisely on the timeline axis */}
                 <div className="absolute -left-[16px] top-1.5 w-[32px] h-[32px]">
                    <svg width="32" height="32" viewBox="0 0 32 32" className="overflow-visible">
-                      <circle cx="16" cy="16" r="14" fill="rgba(93, 230, 255, 0.1)" className="animate-ping" style={{ transformOrigin: "center" }}/>
-                      <circle cx="16" cy="16" r="6" fill="#15121b" stroke="#2dd4bf" strokeWidth="2" className="transition-transform duration-300 group-hover:scale-125" style={{ transformOrigin: "center" }}/>
+                      <circle cx="16" cy="16" r="14" fill="rgba(45,212,191,0.08)" className="animate-ping" style={{ transformOrigin: "center" }}/>
+                      <circle cx="16" cy="16" r="6" fill="#030509" stroke="#2dd4bf" strokeWidth="2" className="transition-transform duration-300 group-hover:scale-125" style={{ transformOrigin: "center" }}/>
                       <circle cx="16" cy="16" r="2.5" fill="#14b8a6" className="transition-transform duration-300 group-hover:scale-110" style={{ transformOrigin: "center" }}/>
                    </svg>
                 </div>
@@ -67,12 +67,12 @@ export default function TimelineView({
                     
                     <div className="flex flex-wrap gap-2">
                       {project.tags.slice(0, 3).map((tag, i) => (
-                        <span key={i} className="px-2 py-1 bg-[#15121b] border border-white/10 font-mono text-[10px] text-[#cbd5e1] uppercase rounded-sm">
+                        <span key={i} className="px-2 py-1 bg-[#05070f] border border-white/10 font-mono text-[10px] text-[#cbd5e1] uppercase rounded-sm">
                           {tag}
                         </span>
                       ))}
                       {project.tags.length > 3 && (
-                        <span className="px-2 py-1 bg-[#15121b] border border-white/10 font-mono text-[10px] text-[#cbd5e1] uppercase rounded-sm">
+                        <span className="px-2 py-1 bg-[#05070f] border border-white/10 font-mono text-[10px] text-[#cbd5e1] uppercase rounded-sm">
                           +{project.tags.length - 3} MORE
                         </span>
                       )}
@@ -91,7 +91,7 @@ export default function TimelineView({
             >
                <div className="absolute -left-[16px] -top-2 w-[32px] h-[32px]">
                    <svg width="32" height="32" viewBox="0 0 32 32">
-                      <rect x="12" y="12" width="8" height="8" fill="#15121b" stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
+                      <rect x="12" y="12" width="8" height="8" fill="#030509" stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
                    </svg>
                </div>
               <div className="pl-12 md:pl-16 font-mono text-xs text-[#cbd5e1] uppercase tracking-widest pt-1">INITIALIZATION ROOT</div>

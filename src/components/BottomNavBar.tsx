@@ -13,7 +13,7 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("intro")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "intro"
-            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(20,184,166,0.35)] border border-[#14b8a6]/20"
             : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Home"
@@ -26,7 +26,7 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("projects")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "projects"
-            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(20,184,166,0.35)] border border-[#14b8a6]/20"
             : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Featured Projects"
@@ -40,7 +40,7 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("timeline")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "timeline"
-            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(20,184,166,0.35)] border border-[#14b8a6]/20"
             : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Project Timeline"
@@ -54,7 +54,7 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("stack")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "stack"
-            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(20,184,166,0.35)] border border-[#14b8a6]/20"
             : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Technical Stack"
@@ -68,7 +68,7 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("network")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "network"
-            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(20,184,166,0.35)] border border-[#14b8a6]/20"
             : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Network Telemetry"
@@ -82,7 +82,7 @@ export default function BottomNavBar({ currentTab, setTab }: BottomNavBarProps) 
         onClick={() => setTab("contact")}
         className={`p-2.5 rounded-full transition-all duration-200 active:scale-95 ${
           currentTab === "contact"
-            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(208,188,255,0.4)] border border-[#14b8a6]/20"
+            ? "bg-[#14b8a6]/20 text-[#14b8a6] shadow-[0_0_15px_rgba(20,184,166,0.35)] border border-[#14b8a6]/20"
             : "text-[#cbd5e1] hover:text-[#2dd4bf]"
         }`}
         title="Contact Me"
