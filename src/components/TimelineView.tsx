@@ -35,7 +35,7 @@ export default function TimelineView({
           <span className="text-white">Build </span>
           <span
             style={{
-              backgroundImage: "linear-gradient(110deg, #2dd4bf 0%, #60a5fa 50%, #a78bfa 100%)",
+              backgroundImage: "linear-gradient(110deg, #0d9488 0%, #2dd4bf 50%, #14b8a6 100%)",
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               color: "transparent",
