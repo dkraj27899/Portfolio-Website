@@ -67,22 +67,84 @@ export default function Header({ currentTab, setTab }: HeaderProps) {
           </div>
 
           {/* Name + subtitle */}
-          <div className="flex flex-col leading-none gap-[3px]">
-            <h1
-              className="font-sans font-black text-lg md:text-xl tracking-tighter uppercase logo-shimmer"
-              style={{
-                backgroundImage: "linear-gradient(90deg, #14b8a6 0%, #0d9488 40%, #2dd4bf 70%, #14b8a6 100%)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-                backgroundSize: "200% auto",
-              }}
-            >
-              DIKSHANT.CORE
-            </h1>
-            <span className="font-mono text-[9px] font-semibold tracking-[0.22em] uppercase text-[#2dd4bf]">
-              SWE // IIT KANPUR
-            </span>
+          <div className="flex flex-col leading-none gap-[5px]">
+
+            {/* 3D extruded DIKSHANT.CORE */}
+            <div className="relative select-none">
+              {/* Extrusion depth layer — offset 2px down+right, darker shade */}
+              <h1
+                aria-hidden
+                className="absolute font-sans font-black text-lg md:text-xl tracking-tighter uppercase pointer-events-none"
+                style={{
+                  top: "2px", left: "1px",
+                  backgroundImage: "linear-gradient(90deg, #054e44 0%, #033d36 35%, #065e54 65%, #054e44 100%)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
+                  backgroundSize: "200% auto",
+                }}
+              >
+                DIKSHANT.CORE
+              </h1>
+              {/* Second extrusion layer — 1px offset, mid tone */}
+              <h1
+                aria-hidden
+                className="absolute font-sans font-black text-lg md:text-xl tracking-tighter uppercase pointer-events-none"
+                style={{
+                  top: "1px", left: "0.5px",
+                  backgroundImage: "linear-gradient(90deg, #0a7a6d 0%, #087566 35%, #0e9e8d 65%, #0a7a6d 100%)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
+                  backgroundSize: "200% auto",
+                }}
+              >
+                DIKSHANT.CORE
+              </h1>
+              {/* Top face — bright shimmer gradient */}
+              <h1
+                className="relative font-sans font-black text-lg md:text-xl tracking-tighter uppercase logo-shimmer group-hover:-translate-y-px transition-transform duration-300"
+                style={{
+                  backgroundImage: "linear-gradient(90deg, #14b8a6 0%, #0d9488 30%, #2dd4bf 55%, #42ead5 75%, #14b8a6 100%)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
+                  backgroundSize: "200% auto",
+                  filter: "drop-shadow(0 0 10px rgba(45,212,191,0.55)) drop-shadow(0 1px 3px rgba(0,0,0,0.9))",
+                }}
+              >
+                DIKSHANT.CORE
+              </h1>
+            </div>
+
+            {/* Subtitle badge */}
+            <div className="flex items-center gap-1.5">
+              <div
+                className="w-px h-3 rounded-full shrink-0"
+                style={{ background: "linear-gradient(to bottom, transparent, #2dd4bf, transparent)" }}
+              />
+              <span
+                className="font-mono text-[8.5px] font-black tracking-[0.28em] uppercase"
+                style={{ color: "#2dd4bf", textShadow: "0 0 8px rgba(45,212,191,0.5)" }}
+              >
+                SWE
+              </span>
+              <span
+                className="inline-block w-1.25 h-1.25 shrink-0 rounded-sm"
+                style={{
+                  background: "#2dd4bf",
+                  transform: "rotate(45deg)",
+                  boxShadow: "0 0 5px rgba(45,212,191,0.9), 0 0 10px rgba(45,212,191,0.4)",
+                }}
+              />
+              <span
+                className="font-mono text-[8.5px] font-bold tracking-[0.2em] uppercase"
+                style={{ color: "#2dd4bf", textShadow: "0 0 8px rgba(45,212,191,0.4)" }}
+              >
+                IIT KANPUR
+              </span>
+            </div>
+
           </div>
         </div>
 
