@@ -44,6 +44,9 @@
   --color-on-error-container:           #fee2e2;
 }
 
+/* Hide native cursor — CustomCursor replaces it */
+*, *::before, *::after { cursor: none !important; }
+
 @layer utilities {
   .glass-card {
     background: rgba(11, 17, 32, 0.5);

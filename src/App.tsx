@@ -10,6 +10,7 @@ import ContactConsole from "./components/ContactConsole";
 import TimelineView from "./components/TimelineView";
 import Footer from "./components/Footer";
 import BottomNavBar from "./components/BottomNavBar";
+import CustomCursor from "./components/CustomCursor";
 
 export default function App() {
   const [currentTab, setTab] = useState<string>("intro");
@@ -95,6 +96,9 @@ export default function App() {
 
       {/* Sticky Bottom Nav Bar (visible on mobile formats) */}
       <BottomNavBar currentTab={currentTab} setTab={setTab} />
+
+      {/* Custom cursor — rendered above everything */}
+      <CustomCursor />
     </div>
   );
 }

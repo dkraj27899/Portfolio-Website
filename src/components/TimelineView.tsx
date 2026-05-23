@@ -1,103 +1,314 @@
 import { motion } from "motion/react";
 import { projectsData } from "../data";
+import { ArrowUpRight } from "lucide-react";
+import type { Project } from "../types";
 
-export default function TimelineView({ 
-  onSelectProject 
-}: { 
-  onSelectProject: (project: import("../types").Project) => void 
+// Unique accent per phase — keeps each card visually distinct
+const ACCENTS = ["#2dd4bf", "#a78bfa", "#60a5fa", "#fb923c"];
+
+export default function TimelineView({
+  onSelectProject,
+}: {
+  onSelectProject: (project: Project) => void;
 }) {
   return (
-    <div className="flex-1 overflow-y-auto pt-8 md:pt-12 bg-transparent">
-      <div className="max-w-4xl mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12 border-b border-white/10 pb-4"
-        >
-          <div className="flex items-center gap-3">
-             <div className="w-2 h-2 bg-[#2dd4bf] animate-pulse"></div>
-            <h2 className="font-mono text-xs tracking-wider text-[#2dd4bf]">SYS.TIMELINE</h2>
-          </div>
-          <h1 className="text-2xl font-mono text-[#14b8a6] mt-2">CHRONOLOGICAL HISTORY</h1>
-          <p className="text-[#cbd5e1] font-mono text-xs mt-2 uppercase">Custom SVG visualization of deployment phases</p>
-        </motion.div>
+    <div className="max-w-4xl mx-auto">
 
-        <div className="relative ml-4 md:ml-8">
-           {/* Continuous background line segment */}
-           <div className="absolute left-0 top-6 bottom-0 w-px bg-white/10 border-l border-dashed border-white/20" />
+      {/* ══════════ Header ══════════ */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="mb-16"
+      >
+        <div className="flex items-center gap-2.5 mb-5">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inset-0 rounded-full bg-teal-400 animate-ping opacity-60" />
+            <span className="relative block h-2 w-2 rounded-full bg-teal-400" />
+          </span>
+          <span className="font-mono text-[10px] tracking-[0.3em] text-teal-400/60 uppercase">
+            Sys.Timeline · Deploy Log
+          </span>
+        </div>
 
-          <div className="relative z-10 w-full">
-            {projectsData.map((project, index) => (
-              <motion.div 
+        <h1 className="font-sans font-black text-4xl md:text-5xl uppercase tracking-tight leading-none">
+          <span className="text-white">Build </span>
+          <span
+            style={{
+              backgroundImage: "linear-gradient(110deg, #2dd4bf 0%, #60a5fa 50%, #a78bfa 100%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            History
+          </span>
+        </h1>
+
+        <p className="font-mono text-[11px] text-white/30 mt-3 tracking-[0.25em] uppercase">
+          {projectsData.length} milestones · Sorted by recency
+        </p>
+      </motion.div>
+
+      {/* ══════════ Timeline ══════════ */}
+      <div className="relative">
+
+        {/* Gradient spine */}
+        <div
+          className="absolute left-5 top-5 bottom-16 w-px pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(45,212,191,0.8) 0%, rgba(167,139,250,0.5) 40%, rgba(96,165,250,0.3) 70%, transparent 100%)",
+          }}
+        />
+
+        <div className="space-y-10">
+          {projectsData.map((project, index) => {
+            const accent   = ACCENTS[index] ?? "#2dd4bf";
+            const phaseNum = String(index + 1).padStart(2, "0");
+            const isLive   = project.date.toLowerCase().includes("present");
+
+            return (
+              <motion.div
                 key={project.id}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -28 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.15 }}
-                className="mb-16 relative group"
+                transition={{ delay: index * 0.13, duration: 0.4, ease: "easeOut" }}
+                className="flex gap-6 md:gap-8 items-start"
               >
-                {/* SVG Node graphic placed precisely on the timeline axis */}
-                <div className="absolute -left-[16px] top-1.5 w-[32px] h-[32px]">
-                   <svg width="32" height="32" viewBox="0 0 32 32" className="overflow-visible">
-                      <circle cx="16" cy="16" r="14" fill="rgba(45,212,191,0.08)" className="animate-ping" style={{ transformOrigin: "center" }}/>
-                      <circle cx="16" cy="16" r="6" fill="#030509" stroke="#2dd4bf" strokeWidth="2" className="transition-transform duration-300 group-hover:scale-125" style={{ transformOrigin: "center" }}/>
-                      <circle cx="16" cy="16" r="2.5" fill="#14b8a6" className="transition-transform duration-300 group-hover:scale-110" style={{ transformOrigin: "center" }}/>
-                   </svg>
+
+                {/* ── Numbered node ── */}
+                <div className="relative shrink-0 w-10 z-10">
+                  {isLive && (
+                    <span
+                      className="absolute inset-[-4px] rounded-full animate-ping opacity-20"
+                      style={{ border: `1px solid ${accent}` }}
+                    />
+                  )}
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center font-mono font-black text-[11px] select-none"
+                    style={{
+                      background: `radial-gradient(circle at 38% 38%, ${accent}28 0%, ${accent}0a 100%)`,
+                      border: `1.5px solid ${accent}55`,
+                      color: accent,
+                      boxShadow: `0 0 20px ${accent}22, inset 0 1px 0 rgba(255,255,255,0.1)`,
+                    }}
+                  >
+                    {phaseNum}
+                  </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8 pl-12 md:pl-16">
-                  <div className="w-48 flex-shrink-0 pt-2 relative">
-                    <div className="font-mono text-sm text-[#2dd4bf] relative inline-block">
-                       {project.date}
-                       {/* Contextual SVG data connector line */}
-                       <svg className="absolute -left-12 top-2.5 w-10 h-0.5" preserveAspectRatio="none">
-                          <line x1="0" y1="0" x2="100%" y2="0" stroke="#2dd4bf" strokeWidth="1" strokeDasharray="3 2" strokeOpacity="0.4" />
-                       </svg>
+                {/* ── Project card ── */}
+                <div
+                  className="flex-1 rounded-2xl cursor-pointer group transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
+                  style={{
+                    background: "linear-gradient(160deg, rgba(17,24,39,0.75) 0%, rgba(5,7,15,0.6) 100%)",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                    borderTop: `2px solid ${accent}55`,
+                    boxShadow: `0 4px 28px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.03)`,
+                  }}
+                  onClick={() => onSelectProject(project)}
+                >
+
+                  {/* Card header row */}
+                  <div className="px-5 pt-4 flex items-center justify-between">
+                    <span className="font-mono text-[8.5px] tracking-[0.28em] text-white/20 uppercase">
+                      Phase {phaseNum}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {isLive && (
+                        <span
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-[8px] tracking-widest uppercase"
+                          style={{
+                            background: `${accent}15`,
+                            border: `1px solid ${accent}35`,
+                            color: accent,
+                          }}
+                        >
+                          <span
+                            className="w-1 h-1 rounded-full animate-pulse"
+                            style={{ background: accent }}
+                          />
+                          Live
+                        </span>
+                      )}
+                      <span
+                        className="font-mono text-[9.5px]"
+                        style={{ color: `${accent}bb` }}
+                      >
+                        {project.date}
+                      </span>
                     </div>
-                    <div className="font-mono text-[10px] text-[#cbd5e1] mt-1 uppercase tracking-widest">Phase {projectsData.length - index}</div>
                   </div>
-                  
-                  <div 
-                    className="flex-1 bg-[#111827]/40 backdrop-blur-md border border-white/5 p-6 hover:border-[#2dd4bf]/50 hover:bg-[#111827]/80 transition-all cursor-pointer rounded-sm"
-                    onClick={() => onSelectProject(project)}
-                  >
-                    <h3 className="font-mono text-lg text-[#14b8a6] mb-2 group-hover:text-[#2dd4bf] transition-colors">{project.title}</h3>
-                    <p className="font-sans text-sm text-[#cbd5e1] mb-4 leading-relaxed">
+
+                  {/* Card body */}
+                  <div className="px-5 pt-2.5 pb-5">
+                    <h3
+                      className="font-sans font-black text-[1.2rem] md:text-[1.35rem] tracking-tight leading-tight mb-2 transition-colors duration-200 group-hover:text-white"
+                      style={{ color: "rgba(255,255,255,0.88)" }}
+                    >
+                      {project.title}
+                    </h3>
+
+                    <p className="font-sans text-[13px] text-white/40 leading-relaxed mb-4">
                       {project.description}
                     </p>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.slice(0, 3).map((tag, i) => (
-                        <span key={i} className="px-2 py-1 bg-[#05070f] border border-white/10 font-mono text-[10px] text-[#cbd5e1] uppercase rounded-sm">
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-0.5 rounded-md font-mono text-[9px] uppercase tracking-wider"
+                          style={{
+                            background: `${accent}0e`,
+                            border: `1px solid ${accent}22`,
+                            color: `${accent}bb`,
+                          }}
+                        >
                           {tag}
                         </span>
                       ))}
-                      {project.tags.length > 3 && (
-                        <span className="px-2 py-1 bg-[#05070f] border border-white/10 font-mono text-[10px] text-[#cbd5e1] uppercase rounded-sm">
-                          +{project.tags.length - 3} MORE
+                    </div>
+
+                    {/* Footer: score bar + CTA */}
+                    <div className="flex items-center justify-between pt-3.5 border-t border-white/[0.05]">
+                      <div className="flex items-center gap-2.5">
+                        <span className="font-mono text-[8px] text-white/20 uppercase tracking-wider">
+                          Score
                         </span>
-                      )}
+                        <div className="w-20 h-[3px] bg-white/[0.06] rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full"
+                            style={{
+                              width: `${project.benchmarkScore}%`,
+                              background: `linear-gradient(90deg, ${accent}70, ${accent})`,
+                              boxShadow: `0 0 6px ${accent}50`,
+                            }}
+                          />
+                        </div>
+                        <span
+                          className="font-mono text-[9px] font-bold"
+                          style={{ color: accent }}
+                        >
+                          {project.benchmarkScore}%
+                        </span>
+                      </div>
+
+                      <motion.div
+                        className="flex items-center gap-2"
+                        initial="rest"
+                        whileHover="hover"
+                      >
+                        <motion.span
+                          className="font-mono text-[9px] uppercase"
+                          style={{ color: accent }}
+                          variants={{
+                            rest:  { opacity: 0.5, letterSpacing: "0.28em" },
+                            hover: { opacity: 1,   letterSpacing: "0.44em" },
+                          }}
+                          transition={{ duration: 0.22 }}
+                        >
+                          Launch
+                        </motion.span>
+
+                        {/* Gamified arrow badge */}
+                        <motion.div
+                          className="relative w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
+                          style={{ background: `${accent}0e`, border: `1.5px solid ${accent}38` }}
+                          variants={{
+                            rest:  { boxShadow: `0 0 0px ${accent}00` },
+                            hover: {
+                              boxShadow: `0 0 0 2px ${accent}22, 0 0 20px ${accent}55, 0 0 40px ${accent}1a`,
+                              background: `${accent}1c`,
+                              border: `1.5px solid ${accent}`,
+                            },
+                          }}
+                          transition={{ duration: 0.28 }}
+                        >
+                          {/* Ripple ring */}
+                          <motion.div
+                            className="absolute inset-0 rounded-xl pointer-events-none"
+                            style={{ border: `1px solid ${accent}` }}
+                            variants={{
+                              rest:  { scale: 1, opacity: 0 },
+                              hover: {
+                                scale: [1, 1.7],
+                                opacity: [0.75, 0],
+                                transition: { repeat: Infinity, duration: 0.88, ease: "easeOut" },
+                              },
+                            }}
+                          />
+
+                          {/* Second ripple — offset phase */}
+                          <motion.div
+                            className="absolute inset-0 rounded-xl pointer-events-none"
+                            style={{ border: `1px solid ${accent}` }}
+                            variants={{
+                              rest:  { scale: 1, opacity: 0 },
+                              hover: {
+                                scale: [1, 1.7],
+                                opacity: [0.4, 0],
+                                transition: { repeat: Infinity, duration: 0.88, ease: "easeOut", delay: 0.44 },
+                              },
+                            }}
+                          />
+
+                          {/* Diagonal bounce arrow */}
+                          <motion.div
+                            variants={{
+                              rest:  { x: 0, y: 0 },
+                              hover: {
+                                x: [0, 3, 0],
+                                y: [0, -3, 0],
+                                transition: { repeat: Infinity, duration: 0.48, ease: "easeInOut" },
+                              },
+                            }}
+                          >
+                            <ArrowUpRight
+                              className="w-3.75 h-3.75 relative z-10"
+                              style={{ color: accent }}
+                            />
+                          </motion.div>
+                        </motion.div>
+                      </motion.div>
                     </div>
                   </div>
                 </div>
               </motion.div>
-            ))}
-            
-            {/* End marker spacer */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: projectsData.length * 0.15 }}
-              className="relative mt-8"
-            >
-               <div className="absolute -left-[16px] -top-2 w-[32px] h-[32px]">
-                   <svg width="32" height="32" viewBox="0 0 32 32">
-                      <rect x="12" y="12" width="8" height="8" fill="#030509" stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
-                   </svg>
-               </div>
-              <div className="pl-12 md:pl-16 font-mono text-xs text-[#cbd5e1] uppercase tracking-widest pt-1">INITIALIZATION ROOT</div>
-            </motion.div>
-          </div>
+            );
+          })}
         </div>
+
+        {/* Origin marker */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: projectsData.length * 0.13 + 0.25 }}
+          className="flex items-center gap-4 mt-10 ml-0.5"
+        >
+          <div
+            className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+            style={{
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
+          >
+            <div
+              className="w-3 h-3 rounded-sm"
+              style={{ border: "1.5px solid rgba(255,255,255,0.2)" }}
+            />
+          </div>
+          <div>
+            <span className="font-mono text-[9px] text-white/20 uppercase tracking-[0.28em] block">
+              Origin · Start of Journey
+            </span>
+            <span className="font-mono text-[8px] text-white/12 uppercase tracking-wider">
+              IIT Kanpur · 2018
+            </span>
+          </div>
+        </motion.div>
+
       </div>
     </div>
   );
