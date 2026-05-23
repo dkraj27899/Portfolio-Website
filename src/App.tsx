@@ -11,6 +11,7 @@ import TimelineView from "./components/TimelineView";
 import Footer from "./components/Footer";
 import BottomNavBar from "./components/BottomNavBar";
 import CustomCursor from "./components/CustomCursor";
+import BackgroundCanvas from "./components/BackgroundCanvas";
 
 export default function App() {
   const [currentTab, setTab] = useState<string>("intro");
@@ -46,10 +47,32 @@ export default function App() {
         }}
       />
 
-      {/* Ambient glow blobs */}
-      <div className="fixed top-[-100px] left-[-100px] w-[500px] h-[500px] bg-[#14b8a6]/6 rounded-full blur-[160px] animate-pulse-slow pointer-events-none" style={{ zIndex: 1 }} />
-      <div className="fixed top-[40%] right-[-200px] w-[600px] h-[600px] bg-[#f59e0b]/5 rounded-full blur-[200px] animate-pulse-slow pointer-events-none" style={{ zIndex: 1 }} />
-      <div className="fixed bottom-[-100px] left-[30%] w-[400px] h-[400px] bg-[#2dd4bf]/4 rounded-full blur-[140px] animate-pulse-slow pointer-events-none" style={{ zIndex: 1 }} />
+      {/* ── Layer 1: Particle constellation canvas ── */}
+      <BackgroundCanvas />
+
+      {/* ── Layer 2: Drifting ambient orbs ── */}
+      <div className="orb-a  fixed top-[-180px] left-[-120px]  w-[620px] h-[620px] rounded-full bg-[#14b8a6]/7  blur-[180px] pointer-events-none" style={{ zIndex: 1 }} />
+      <div className="orb-b  fixed top-[15%]   right-[-180px]  w-[480px] h-[480px] rounded-full bg-[#7c3aed]/4  blur-[160px] pointer-events-none" style={{ zIndex: 1 }} />
+      <div className="orb-c  fixed bottom-[-80px] right-[10%]  w-[520px] h-[520px] rounded-full bg-[#2dd4bf]/5  blur-[170px] pointer-events-none" style={{ zIndex: 1 }} />
+      <div className="orb-ar fixed top-[55%]   left-[-100px]   w-[380px] h-[380px] rounded-full bg-[#0ea5e9]/4  blur-[140px] pointer-events-none" style={{ zIndex: 1 }} />
+      <div className="orb-br fixed top-[8%]    right-[22%]     w-[260px] h-[260px] rounded-full bg-[#14b8a6]/5  blur-[110px] pointer-events-none" style={{ zIndex: 1 }} />
+
+      {/* ── Layer 3: Aurora sweep bands ── */}
+      <div
+        className="aurora-ltr fixed top-0 left-0 w-[38%] h-full pointer-events-none"
+        style={{
+          zIndex: 1,
+          background: "linear-gradient(90deg, transparent 0%, rgba(45,212,191,0.035) 30%, rgba(20,184,166,0.055) 50%, rgba(45,212,191,0.035) 70%, transparent 100%)",
+        }}
+      />
+      <div
+        className="aurora-rtl fixed top-0 left-0 w-[32%] h-full pointer-events-none"
+        style={{
+          zIndex: 1,
+          background: "linear-gradient(90deg, transparent 0%, rgba(124,58,237,0.025) 30%, rgba(45,212,191,0.04) 50%, rgba(124,58,237,0.025) 70%, transparent 100%)",
+        }}
+      />
+
 
       {/* Persistent High-Fidelity App Bar Header */}
       <Header currentTab={currentTab} setTab={setTab} />
