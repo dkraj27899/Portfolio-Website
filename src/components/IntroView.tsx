@@ -113,17 +113,28 @@ export default function IntroView({ setTab }: { setTab: (tab: string) => void })
 
         {/* ── Hire badge ── */}
         <div
-          className="inline-flex items-center gap-3 px-4 py-2 rounded-lg font-mono text-[10px]"
+          className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full select-none"
           style={{
-            background: "rgba(20,184,166,0.05)",
-            border: "1px solid rgba(20,184,166,0.18)",
-            borderLeft: "3px solid #14b8a6",
+            background: "linear-gradient(145deg, rgba(16,185,129,0.1) 0%, rgba(5,150,105,0.06) 100%)",
+            border: "1px solid rgba(16,185,129,0.28)",
+            boxShadow: "0 2px 12px rgba(16,185,129,0.1), 0 1px 3px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06)",
           }}
         >
-          <span className="text-[#14b8a6] font-bold select-none">&gt;_</span>
-          <span className="text-[#2dd4bf] font-semibold tracking-[0.2em] uppercase">Open to Work</span>
-          <span className="text-white/20 select-none">·</span>
-          <span className="text-[#94a3b8] tracking-wider uppercase">Full-Stack · Remote OK</span>
+          {/* Live green dot */}
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-50" />
+            <span className="relative block h-full w-full rounded-full bg-emerald-400" />
+          </span>
+
+          <span className="font-sans font-semibold text-[11px] text-emerald-400 tracking-wide">
+            Open to Work
+          </span>
+
+          <span className="w-px h-3 rounded-full bg-white/15 shrink-0" />
+
+          <span className="font-sans text-[10px] text-white/40 tracking-wide">
+            Remote · Hybrid · In-Office
+          </span>
         </div>
 
         {/* ── Role title — the hero ── */}
@@ -301,7 +312,7 @@ export default function IntroView({ setTab }: { setTab: (tab: string) => void })
                   }}
                 >
                   {/* Company logo mark */}
-                  <div className="flex-shrink-0 flex flex-col items-center gap-1.5">
+                  <div className="shrink-0 flex flex-col items-center gap-1.5">
                     <div
                       className="w-11 h-11 rounded-xl flex flex-col items-center justify-center select-none"
                       style={{
@@ -342,7 +353,7 @@ export default function IntroView({ setTab }: { setTab: (tab: string) => void })
                         </div>
                         <p className="text-[12px] text-[#94a3b8] mt-0.5 font-sans">{item.role}</p>
                       </div>
-                      <span className="flex-shrink-0 font-mono text-[9px] text-[#475569] mt-0.5 whitespace-nowrap">
+                      <span className="shrink-0 font-mono text-[9px] text-[#475569] mt-0.5 whitespace-nowrap">
                         {item.period}
                       </span>
                     </div>
@@ -352,7 +363,7 @@ export default function IntroView({ setTab }: { setTab: (tab: string) => void })
                       {item.points.map((pt, i) => (
                         <li key={i} className="flex items-start gap-2">
                           <span
-                            className="flex-shrink-0 w-[5px] h-[5px] rounded-full mt-[5px]"
+                            className="shrink-0 w-1.25 h-1.25 rounded-full mt-1.25"
                             style={{ background: item.accent, boxShadow: `0 0 4px ${item.accent}80` }}
                           />
                           <span className="text-[11px] text-[#94a3b8] leading-relaxed">{pt}</span>
@@ -389,7 +400,7 @@ export default function IntroView({ setTab }: { setTab: (tab: string) => void })
             {/* Skeleton loader for next entry */}
             {visibleCount < CAREER.length && (
               <div className="flex gap-4 px-5 py-4">
-                <div className="w-11 h-11 rounded-xl flex-shrink-0 animate-pulse"
+                <div className="w-11 h-11 rounded-xl shrink-0 animate-pulse"
                   style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }} />
                 <div className="flex-1 space-y-2 pt-1">
                   <div className="h-3.5 rounded-md animate-pulse w-36" style={{ background: "rgba(255,255,255,0.05)" }} />
